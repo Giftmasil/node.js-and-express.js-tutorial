@@ -1,7 +1,12 @@
-const _ = require("lodash")
+const {createReadStream} = require("fs")
 
-const items = [1, [2, [3, [4, [5]]]]]
+// highWaterMark is the amount of data that can be stored in the buffer before it is processed
+const stream = createReadStream("./node.js first lessons/content/big.txt", {highWaterMark: 90000})
 
-const newItems = _.flatMapDeep(items)
+stream.on("data", (result) => {
+    console.log(result)
+})
 
-console.log(newItems)
+stream.on("error", (err) => {
+    console.log(err)
+})
