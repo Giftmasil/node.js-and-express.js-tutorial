@@ -38,11 +38,11 @@ app.get('/api/v1/query', (req, res) => {
   const { search, limit } = req.query
   let sortedProducts = [...products]
 
-  if (search) {
-    sortedProducts = sortedProducts.filter((product) => {
-      return product.name.startsWith(search)
+  if(search) {
+    sortedProducts = sortedProducts.filter(product => {
+        return product.name.toLowerCase().includes(search.toLowerCase())
     })
-  }
+}
   if (limit) {
     sortedProducts = sortedProducts.slice(0, Number(limit))
   }
